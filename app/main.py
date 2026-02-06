@@ -1,5 +1,5 @@
 from fastapi import FastAPI 
-from routers import users
+from routers import users,posts
 from DataBase.db import create_db_and_tables
 from contextlib import asynccontextmanager
 
@@ -12,7 +12,7 @@ app = FastAPI(lifespan=lifespan) # the parameter is for calling the functon abov
 
 #including the routers here 
 app.include_router(users.router,prefix="/users",tags=["Users"])
-
+app.include_router(posts.router,prefix="/posts",tags=["Posts"])
 @app.get("/")
 def hello():
     return {"message":"Hello from fast"} 

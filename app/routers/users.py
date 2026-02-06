@@ -1,6 +1,8 @@
-from fastapi import APIRouter,HTTPException 
+from fastapi import APIRouter,HTTPException,Depends 
 from pydantic import BaseModel  # <--- 1. Import this
-from schemas import UserInput
+from schemas import UserInput,PostInput
+from DataBase.db import AsyncSession,get_async_session,Post
+import uuid
 
 router=APIRouter()
 list1 = ["oussama", "amine", "sarah", "karim", "mohamed"]
