@@ -1,8 +1,6 @@
 from fastapi import APIRouter,HTTPException 
 from pydantic import BaseModel  # <--- 1. Import this
-
-class UserInput(BaseModel): 
-    name:str 
+from schemas import UserInput
 
 router=APIRouter()
 list1 = ["oussama", "amine", "sarah", "karim", "mohamed"]
@@ -19,8 +17,8 @@ def add_user(user : UserInput):
     return {"message":"your user has been added succefully ","your new list ":list1}
 
 @router.get("/{nom}")
-def get_user_by_name(nom : str): 
+def get_user_by_name(nom : str)->UserInput : # this spesefy the type of the output like what we expect in return  
     exist = nom in  list1
     if (exist): 
-        return {"message" : "This user exist "}
+        return {"name" : "This user exist "}
     raise HTTPException(404,"User not found") # this is used to raise an error 
